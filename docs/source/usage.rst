@@ -14,9 +14,7 @@ The :class:`ICalFeed <django_ical.views.ICalFeed>` class represents an
 iCalendar calendar. Calendars contain items which are events.
 
 Let's look at a simple example. Here the item_start_datetime is a django-ical
-extension that supplies the start time of the event. The `file_name` attribute
-is used as base name when generating the file. In the example below, it will be
-called "Calendar for my events.ics".
+extension that supplies the start time of the event.
 
 .. code-block:: python
 
@@ -29,7 +27,6 @@ called "Calendar for my events.ics".
         """
         product_id = '-//example.com//Example//EN'
         timezone = 'UTC'
-        file_name = "Calendar for my events"
 
         def items(self):
             return Event.objects.all().order_by('-start_datetime')
@@ -119,13 +116,6 @@ Here is a table of all of the fields that django-ical supports.
 |                       |                       | shows up in busy searches.  |
 |                       |                       | (e.g. OPAQUE, TRANSPARENT)  |
 +-----------------------+-----------------------+-----------------------------+
-| item_organizer        | `ORGANIZER`_          | The event organizer.        |
-|                       |                       | Expected to be a            |
-|                       |                       | vCalAddress object. See     |
-|                       |                       | `iCalendar`_ documentation  |
-|                       |                       | or tests to know how to     |
-|                       |                       | build them.                 |
-+-----------------------+-----------------------+-----------------------------+
 
 Note:
 
@@ -159,8 +149,6 @@ See: `The syndication feed framework: Specifying the type of feed <https://docs.
 .. _LOCATION: http://www.kanzaki.com/docs/ical/location.html
 .. _TRANSP: http://www.kanzaki.com/docs/ical/transp.html
 .. _URL: http://www.kanzaki.com/docs/ical/url.html
-.. _ORGANIZER: http://www.kanzaki.com/docs/ical/organizer.html
 .. _X-WR-CALNAME: http://en.wikipedia.org/wiki/ICalendar#Calendar_extensions
 .. _X-WR-CALDESC: http://en.wikipedia.org/wiki/ICalendar#Calendar_extensions
 .. _X-WR-TIMEZONE: http://en.wikipedia.org/wiki/ICalendar#Calendar_extensions
-.. _iCalendar: http://icalendar.readthedocs.org/en/latest/index.html
