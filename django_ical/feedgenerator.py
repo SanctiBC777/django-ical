@@ -60,6 +60,7 @@ ITEM_EVENT_FIELD_MAP = (
     ('location',            'location'),
     ('geolocation',         'geo'),
     ('link',                'url'),
+    ('organizer',           'organizer'),
 )
 
 
