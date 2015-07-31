@@ -11,10 +11,6 @@ from django.http import HttpResponse, Http404
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.syndication.views import Feed
 from django.utils.http import http_date
-try:
-    from django.utils import six
-except ImportError:
-    import six
 
 from django_ical import feedgenerator
 
@@ -98,21 +94,22 @@ class ICalFeed(Feed):
 
     def _get_dynamic_attr(self, attname, obj, default=None):
         """
-        Copied from django.contrib.syndication.views.Feed (v1.7.1)
+        Copied from django.contrib.syndication.views.Feed
         """
         try:
             attr = getattr(self, attname)
         except AttributeError:
             return default
         if callable(attr):
-            # Check co_argcount rather than try/excepting the function and
-            # catching the TypeError, because something inside the function
-            # may raise the TypeError. This technique is more accurate.
-            try:
-                code = six.get_function_code(attr)
-            except AttributeError:
-                code = six.get_function_code(attr.__call__)
-            if code.co_argcount == 2:       # one argument is 'self'
+            # Check func_code.co_argcount rather than try/excepting the
+            # function and catching the TypeError, because something inside
+            # the function may raise the TypeError. This technique is more
+            # accurate.
+            if hasattr(attr, 'func_code'):
+                argcount = attr.func_code.co_argcount
+            else:
+                argcount = attr.__call__.func_code.co_argcount
+            if argcount == 2:  # one argument is 'self'
                 return attr(obj)
             else:
                 return attr()
