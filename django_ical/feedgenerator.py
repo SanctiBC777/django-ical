@@ -62,11 +62,6 @@ ITEM_EVENT_FIELD_MAP = (
     ('geolocation',         'geo'),
     ('link',                'url'),
     ('organizer',           'organizer'),
-    ('categories',          'categories'),
-    ('rrule',               'rrule'),
-    ('exrule',              'exrule'),
-    ('rdate',               'rdate'),
-    ('exdate',              'exdate'),
 )
 
 
